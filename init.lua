@@ -23,6 +23,7 @@ vim.o.smarttab = true
 vim.o.mouse = 'c'
 vim.o.signcolumn = 'yes'
 vim.o.encoding = "utf-8"
+vim.g.rust_recommended_style = false
 
 -- extensions
 local builtin = require('telescope.builtin')
@@ -64,6 +65,9 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
+  indent = {
+    enable = false
+  }
 }
 
 vim.cmd('colorscheme dogrun')
