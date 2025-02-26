@@ -13,9 +13,6 @@ Plug('https://github.com/terryma/vim-multiple-cursors')
 
 vim.call('plug#end')
 
-vim.wo.number = true
-vim.wo.relativenumber = true
-vim.o.statuscolumn = "%s %l %r "
 vim.o.autoindent = true
 vim.o.tabstop = 6
 vim.o.shiftwidth = 6
