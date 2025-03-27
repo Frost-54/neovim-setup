@@ -10,20 +10,16 @@ Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate'})
 Plug('https://github.com/rafi/awesome-vim-colorschemes')
 Plug('https://github.com/vim-airline/vim-airline')
 Plug('https://github.com/terryma/vim-multiple-cursors')
+Plug('MunifTanjim/nui.nvim')
+Plug('https://github.com/nvim-neo-tree/neo-tree.nvim.git')
+Plug('nvim-tree/nvim-web-devicons')
+Plug('antosha417/nvim-lsp-file-operations')
 
 vim.call('plug#end')
 
-vim.o.autoindent = true
-vim.o.tabstop = 6
-vim.o.shiftwidth = 6
-vim.o.smarttab = true
-vim.o.mouse = 'c'
-vim.o.signcolumn = 'yes'
-vim.o.encoding = "utf-8"
-vim.g.rust_recommended_style = false
-
 -- extensions
 local builtin = require('telescope.builtin')
+
 vim.keymap.set('n', 'ff', builtin.find_files, {})
 
 local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
@@ -35,6 +31,7 @@ vim.keymap.set('n', 'gt', '<Plug>(coc-definition)')
 vim.keymap.set('n', 'gy', '<Plug>(coc-typedefinition)')
 vim.keymap.set('n', 'gi', '<Plug>(coc-implementation')
 vim.keymap.set('n', 'gr', '<Plug>(coc-references')
+vim.keymap.set('n', 'fe', '<cmd>:Neotree<cr>')
 
 vim.keymap.set('n', 'gr', '<cmd>:call ShowDocumentation()<cr>')
 
@@ -45,6 +42,18 @@ vim.keymap.set("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]
 
 local opts = {silent = true, nowait = true}
 vim.keymap.set("n", "fi", "<Plug>(coc-fix-current)", opts)
+
+require('nvim-web-devicons').setup()
+require("lsp-file-operations").setup()
+require('neo-tree').setup {
+	use_libuv_file_watcher=true,
+	sort_case_insensitive = false,
+	hide_dotfiles = false,
+	hide_hidden = false,
+	never_show = {
+		'.DS_Store'
+	}
+}
 
 require'nvim-treesitter.configs'.setup {
   -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -63,9 +72,24 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
   indent = {
-    enable = false
+	  enable = false
   }
 }
 
 vim.cmd('colorscheme dogrun')
 vim.cmd("call coc#rpc#stop()")
+
+--vim.wo.number = true
+--vim.wo.relativenumber = true
+--vim.o.statuscolumn = "%s %l %r "
+vim.o.expandtab = false
+vim.o.autoindent = true
+vim.o.tabstop = 6
+vim.o.shiftwidth = 6
+vim.o.softtabstop = 6
+--vim.o.smarttab = true
+vim.o.mouse = 'c'
+vim.o.signcolumn = 'yes'
+vim.o.encoding = "utf-8"
+vim.o.syntax = "off"
+vim.g.rust_recommended_style = false
